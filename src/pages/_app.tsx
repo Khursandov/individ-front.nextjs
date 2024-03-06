@@ -8,7 +8,6 @@ import 'simplebar-react/dist/simplebar.min.css';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
 // ----------------------------------------------------------------------
-
 import { CacheProvider, EmotionCache } from '@emotion/react';
 // next
 import { NextPage } from 'next';
@@ -24,12 +23,13 @@ import ThemeLocalization from '../locales';
 import ProgressBar from '../components/progress-bar';
 import SnackbarProvider from '../components/snackbar';
 import { MotionLazyContainer } from '../components/animate';
-import { ThemeSettings, SettingsProvider } from '../components/settings';
+import { SettingsProvider, ThemeSettings } from '../components/settings';
 
 // Check our docs
 // https://docs.minimals.cc/authentication/ts-version
-
 import { AuthProvider } from '../auth/JwtContext';
+import { store } from '../store';
+import { Provider } from 'react-redux';
 
 // ----------------------------------------------------------------------
 
@@ -55,22 +55,24 @@ export default function MyApp(props: MyAppProps) {
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
 
-      <AuthProvider>
-        <SettingsProvider>
-          <MotionLazyContainer>
-            <ThemeProvider>
-              <ThemeSettings>
-                <ThemeLocalization>
-                  <SnackbarProvider>
-                    <ProgressBar />
-                    {getLayout(<Component {...pageProps} />)}
-                  </SnackbarProvider>
-                </ThemeLocalization>
-              </ThemeSettings>
-            </ThemeProvider>
-          </MotionLazyContainer>
-        </SettingsProvider>
-      </AuthProvider>
+      <Provider store={store}>
+        <AuthProvider>
+          <SettingsProvider>
+            <MotionLazyContainer>
+              <ThemeProvider>
+                <ThemeSettings>
+                  <ThemeLocalization>
+                    <SnackbarProvider>
+                      <ProgressBar />
+                      {getLayout(<Component {...pageProps} />)}
+                    </SnackbarProvider>
+                  </ThemeLocalization>
+                </ThemeSettings>
+              </ThemeProvider>
+            </MotionLazyContainer>
+          </SettingsProvider>
+        </AuthProvider>
+      </Provider>
     </CacheProvider>
   );
 }
