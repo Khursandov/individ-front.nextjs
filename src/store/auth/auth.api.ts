@@ -2,10 +2,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQuery, tagTypes } from '../../core/api/api.settings';
 import { IBaseResponse } from '../../core/api/api.base.interface';
 import { ILogin, ILoginResponse } from './auth.interface';
-// import { IBaseResponse } from 'core/api/api.base.interface';
-// import { baseQuery, tagTypes } from 'core/api/api.settings';
-// import { ILogin, IAuthResponse, IRecoveryPassword, IProfileChangePassword } from 'store/auth/auth.interface'
-// import { IAdmin } from 'store/sensitive/admins/admin.interface'
+import { IUSer } from '../../core/types/user.interface';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
@@ -29,37 +26,16 @@ export const authApi = createApi({
       }),
     }),
 
-    getMe: builder.query<IBaseResponse<any>, void>({
+    getMe: builder.query<IBaseResponse<IUSer>, void>({
       query: () => '/auth/profile',
     }),
 
-    // recoveryPassword: builder.mutation({
-    //   query: (payload: {data: IRecoveryPassword, token: string}) => ({
-    //     url: `recovery/password/verify/${payload.token}`,
-    //     method: 'POST',
-    //     body: payload.data,
-    //   })
-    // }),
     logOut: builder.mutation({
       query: () => ({
         url: '/auth/log-out',
         method: 'POST',
       }),
     }),
-    // changeProfilPassword: builder.mutation({
-    //   query: (payload: IProfileChangePassword) => ({
-    //     url: 'profile/password',
-    //     method: 'PATCH',
-    //     body: payload,
-    //   })
-    // }),
-    // editProfile: builder.mutation({
-    //   query: (payload: any) => ({
-    //     url: 'profile',
-    //     method: 'POST',
-    //     body: payload,
-    //   })
-    // }),
   }),
 });
 

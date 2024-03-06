@@ -22,9 +22,9 @@ const navConfig = [
   {
     subheader: 'general v4.3.0',
     items: [
-      { title: 'One', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
-      { title: 'Two', path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
-      { title: 'Three', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
+      { title: 'Gruppalar', path: PATH_DASHBOARD.one, icon: ICONS.dashboard },
+      { title: "O'qituvchilar", path: PATH_DASHBOARD.two, icon: ICONS.ecommerce },
+      { title: 'Ustozlar', path: PATH_DASHBOARD.three, icon: ICONS.analytics },
     ],
   },
 

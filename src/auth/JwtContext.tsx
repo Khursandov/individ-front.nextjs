@@ -93,9 +93,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
   const storageAvailable = localStorageAvailable();
 
   const { data, isLoading } = useGetMeQuery();
-  const [loginUser] = useLoginMutation();
 
-  console.log(data, isLoading);
+  const [loginUser] = useLoginMutation();
 
   const initialize = useCallback(async () => {
     try {
@@ -142,11 +141,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
   // LOGIN
   const login = useCallback(
     async (phone: string, password: string) => {
-      const response = await loginUser({ phone, password });
+      // Need to refactor this
+      // @ts-ignore
+      const response1 = await loginUser({ phone, password }).then((response) => response.data);
 
-      const { access_token } = response.data;
-
-      const user = {};
+      const { access_token, user } = response1;
 
       setSession(access_token);
 
